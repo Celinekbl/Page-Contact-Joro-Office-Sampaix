@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Jöro Office · 27 Lucien Sampaix</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@300,400,500,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --joro-dark:  #1C2626;
+    --joro-teal:  #81C6C1;
+    --joro-white: #FFFFFF;
+    --sidebar-bg: #162020;
+    --surface-dark: rgba(255,255,255,0.05);
+    --border:       rgba(255,255,255,0.16);
+    --teal-glow:    rgba(129,198,193,0.1);
+    --teal-dim:     rgba(129,198,193,0.35);
+    --text-muted:   rgba(255,255,255,0.48);
+    --text-faint:   rgba(255,255,255,0.24);
+    --radius: 3px;
+    --ease: 0.22s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'General Sans', sans-serif;
+    background: var(--joro-dark);
+    color: var(--joro-white);
+    min-height: 100vh;
+    font-size: 14px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page-grid {
+    display: grid;
+    grid-template-columns: 352px 1fr;
+    min-height: 100vh;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    background: var(--sidebar-bg);
+    border-right: 1px solid rgba(129,198,193,0.12);
+    display: flex;
+    flex-direction: column;
+    padding: 52px 38px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+  }
+  .sidebar::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; right: -100px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(129,198,193,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .logo {
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--joro-white);
+    margin-bottom: 5px;
+  }
+  .logo em { font-style: normal; color: var(--joro-teal); }
+
+  .address {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 44px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .address::before {
+    content: '';
+    display: block; width: 16px; height: 1px;
+    background: var(--joro-teal); opacity: .5;
+  }
+
+  .sidebar-h {
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 1.18;
+    color: var(--joro-white);
+    margin-bottom: 12px;
+  }
+  .sidebar-h strong { font-weight: 500; color: var(--joro-teal); }
+
+  .sidebar-p {
+    font-size: 12.5px;
+    font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 38px;
+  }
+
+  .args { display: flex; flex-direction: column; gap: 2px; margin-bottom: 38px; }
+  .arg {
+    display: flex; align-items: flex-start; gap: 13px;
+    padding: 12px 14px;
+    border-radius: var(--radius);
+    border: 1px solid transparent;
+    transition: border-color var(--ease), background var(--ease);
+  }
+  .arg:hover { border-color: rgba(129,198,193,0.18); background: var(--teal-glow); }
+  .arg-dot { width: 5px; height: 5px; background: var(--joro-teal); border-radius: 50%; flex-shrink: 0; margin-top: 6px; opacity: .75; }
+  .arg-name { font-size: 12px; font-weight: 500; color: var(--joro-white); }
+  .arg-desc { font-size: 11px; font-weight: 300; color: var(--text-muted); margin-top: 1px; }
+
+  .sep { height: 1px; background: rgba(255,255,255,0.07); margin: auto 0 28px; }
+
+  .cta-label { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 7px; }
+  .cta-link { font-size: 12.5px; color: var(--joro-teal); text-decoration: none; }
+  .cta-link:hover { text-decoration: underline; }
+
+  /* ── MAIN ── */
+  .main { padding: 60px 56px; max-width: 800px; }
+
+  .eyebrow {
+    font-size: 10px; font-weight: 500;
+    letter-spacing: .2em; text-transform: uppercase;
+    color: var(--joro-teal); margin-bottom: 10px;
+  }
+  .page-title {
+    font-size: 48px; font-weight: 300;
+    line-height: 1.06; letter-spacing: -.01em;
+    color: var(--joro-white); margin-bottom: 8px;
+  }
+  .page-title strong { font-weight: 500; color: var(--joro-teal); }
+  .page-sub {
+    font-size: 13px; font-weight: 300;
+    color: var(--text-muted); margin-bottom: 50px;
+  }
+
+  /* SECTIONS */
+  .section {
+    margin-bottom: 42px;
+    opacity: 0; transform: translateY(10px);
+    animation: up .42s forwards;
+  }
+  .section:nth-child(1){animation-delay:.06s}
+  .section:nth-child(2){animation-delay:.13s}
+  .section:nth-child(3){animation-delay:.20s}
+  .section:nth-child(4){animation-delay:.27s}
+  .section:nth-child(5){animation-delay:.34s}
+  @keyframes up { to { opacity:1; transform:translateY(0) } }
+
+  .sec-head {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 20px; padding-bottom: 11px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .sec-num {
+    width: 20px; height: 20px;
+    border: 1px solid var(--teal-dim); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 600; color: var(--joro-teal);
+  }
+  .sec-name {
+    font-size: 10px; font-weight: 500;
+    letter-spacing: .18em; text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* GRID */
+  .row { display: grid; gap: 13px; }
+  .r2  { grid-template-columns: 1fr 1fr; }
+  .r3  { grid-template-columns: 1fr 1fr 1fr; }
+  .row + .row { margin-top: 13px; }
+
+  /* FIELD */
+  .f { display: flex; flex-direction: column; gap: 6px; }
+  .lbl {
+    font-size: 11px; font-weight: 400;
+    letter-spacing: .04em; color: var(--text-muted);
+    display: flex; align-items: center; gap: 3px;
+  }
+  .req { color: var(--joro-teal); }
+
+  /* White inputs — matching screenshot */
+  .f input, .f select, .f textarea {
+    background: var(--joro-white);
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+    color: var(--joro-dark);
+    font-family: 'General Sans', sans-serif;
+    font-size: 13px; font-weight: 400;
+    padding: 10px 14px;
+    outline: none; width: 100%;
+    appearance: none; -webkit-appearance: none;
+    transition: border-color var(--ease), box-shadow var(--ease);
+  }
+  .f input::placeholder, .f textarea::placeholder { color: rgba(28,38,38,.3); }
+  .f input:focus, .f select:focus, .f textarea:focus {
+    border-color: var(--joro-teal);
+    box-shadow: 0 0 0 3px rgba(129,198,193,.16);
+  }
+  .f select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%231C2626' opacity='.35'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-color: var(--joro-white);
+    padding-right: 36px; cursor: pointer;
+  }
+  .f select option { background: #fff; color: var(--joro-dark); }
+  .f select.ph { color: rgba(28,38,38,.32); }
+  .f textarea { resize: vertical; min-height: 94px; line-height: 1.65; }
+
+  /* Phone */
+  .phone { display: grid; grid-template-columns: 86px 1fr; }
+  .phone select { border-radius: var(--radius) 0 0 var(--radius); border-right: 1px solid rgba(28,38,38,.12)!important; font-size: 12px; }
+  .phone input  { border-radius: 0 var(--radius) var(--radius) 0; }
+
+  /* RADIO CARDS */
+  .rc-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 9px; }
+  .rc input { display: none; }
+  .rc label {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    padding: 17px 10px;
+    background: var(--surface-dark); border: 1px solid var(--border);
+    border-radius: var(--radius); cursor: pointer;
+    font-size: 11px; font-weight: 400; color: var(--text-muted);
+    letter-spacing: .04em; text-align: center;
+    transition: all var(--ease);
+  }
+  .rc label svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+  .rc label:hover { border-color: var(--teal-dim); color: var(--joro-white); }
+  .rc input:checked + label { border-color: var(--joro-teal); background: var(--teal-glow); color: var(--joro-teal); }
+
+  /* RANGE */
+  .range-wrap { display: flex; flex-direction: column; gap: 9px; }
+  .range-top { display: flex; justify-content: space-between; align-items: center; }
+  .range-badge {
+    font-size: 12px; font-weight: 500; color: var(--joro-teal);
+    background: var(--teal-glow); padding: 3px 10px;
+    border-radius: 20px; border: 1px solid var(--teal-dim);
+  }
+  input[type=range] {
+    -webkit-appearance: none; width: 100%; height: 2px;
+    background: rgba(255,255,255,.1); border-radius: 2px;
+    outline: none; cursor: pointer;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 13px; height: 13px; background: var(--joro-teal);
+    border-radius: 50%; box-shadow: 0 0 0 3px rgba(129,198,193,.18);
+    transition: box-shadow var(--ease);
+  }
+  input[type=range]::-webkit-slider-thumb:hover { box-shadow: 0 0 0 5px rgba(129,198,193,.25); }
+  .range-marks { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-faint); }
+
+  /* BUDGET */
+  .bgt-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+  .bgt input { display: none; }
+  .bgt label {
+    display: block; padding: 11px 8px; text-align: center;
+    background: var(--surface-dark); border: 1px solid var(--border);
+    border-radius: var(--radius); cursor: pointer;
+    font-size: 12px; font-weight: 400; color: var(--text-muted);
+    transition: all var(--ease); line-height: 1.3;
+  }
+  .bgt label small { display: block; font-size: 9px; text-transform: uppercase; letter-spacing: .08em; opacity: .5; margin-top: 2px; }
+  .bgt label:hover { border-color: var(--teal-dim); color: var(--joro-white); }
+  .bgt input:checked + label { border-color: var(--joro-teal); background: var(--teal-glow); color: var(--joro-teal); }
+
+  /* CHECKBOXES */
+  .ck-list { display: flex; flex-direction: column; gap: 9px; }
+  .ck {
+    display: flex; align-items: center; gap: 10px; cursor: pointer;
+    font-size: 12px; font-weight: 400; color: var(--text-muted);
+    transition: color var(--ease); user-select: none;
+  }
+  .ck:hover { color: var(--joro-white); }
+  .ck input { display: none; }
+  .box {
+    width: 15px; height: 15px; flex-shrink: 0;
+    border: 1px solid var(--border); border-radius: 2px;
+    background: var(--surface-dark);
+    display: flex; align-items: center; justify-content: center;
+    transition: all var(--ease);
+  }
+  .ck input:checked ~ .box { background: var(--joro-teal); border-color: var(--joro-teal); }
+  .box svg { width: 8px; height: 8px; stroke: var(--joro-dark); fill: none; stroke-width: 2.5; opacity: 0; transition: opacity var(--ease); }
+  .ck input:checked ~ .box svg { opacity: 1; }
+
+  /* FOOTER */
+  .form-foot {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 50px; padding-top: 26px;
+    border-top: 1px solid rgba(255,255,255,.07);
+  }
+  .rgpd { font-size: 11px; font-weight: 300; color: var(--text-faint); max-width: 310px; line-height: 1.7; }
+  .rgpd a { color: var(--text-muted); text-decoration: underline; }
+
+  .btn {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 26px;
+    background: var(--joro-teal); color: var(--joro-dark);
+    border: none; border-radius: var(--radius);
+    font-family: 'General Sans', sans-serif;
+    font-size: 12px; font-weight: 500;
+    letter-spacing: .1em; text-transform: uppercase;
+    cursor: pointer; transition: all var(--ease);
+  }
+  .btn:hover { background: #9dd4d0; transform: translateY(-1px); box-shadow: 0 8px 22px rgba(129,198,193,.2); }
+  .btn:active { transform: translateY(0); }
+  .btn svg { width: 12px; height: 12px; stroke: var(--joro-dark); fill: none; stroke-width: 2; }
+
+  /* SUCCESS */
+  .success {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(28,38,38,.97); backdrop-filter: blur(6px);
+    flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+  }
+  .success.show { display: flex; animation: fade .3s; }
+  @keyframes fade { from{opacity:0} to{opacity:1} }
+  .s-ring { width: 68px; height: 68px; border: 1px solid var(--joro-teal); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .s-ring svg { width: 26px; height: 26px; stroke: var(--joro-teal); fill: none; stroke-width: 1.5; }
+  .s-h { font-size: 30px; font-weight: 300; color: var(--joro-white); text-align: center; }
+  .s-p { font-size: 13px; font-weight: 300; color: var(--text-muted); text-align: center; }
+
+  @media (max-width:860px) {
+    .page-grid { grid-template-columns: 1fr; }
+    .sidebar { position: static; height: auto; }
+    .main { padding: 40px 22px; }
+    .r2,.r3 { grid-template-columns: 1fr; }
+    .rc-grid { grid-template-columns: 1fr 1fr; }
+    .bgt-grid { grid-template-columns: 1fr 1fr; }
+    .form-foot { flex-direction: column; gap: 18px; align-items: flex-start; }
+    .page-title { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-grid">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo">Jö<em>ro</em> Office</div>
+    <div class="address">27 Lucien Sampaix — Paris 10e</div>
+
+    <h2 class="sidebar-h">Des bureaux<br><strong>à votre image</strong></h2>
+    <p class="sidebar-p">Bureaux opérés clé-en-main au cœur de Paris — flexibles, équipés et personnalisables pour votre équipe.</p>
+
+    <div class="args">
+      <div class="arg"><div class="arg-dot"></div><div><div class="arg-name">Bureaux privatifs</div><div class="arg-desc">De 2 à 50 postes, entièrement équipés</div></div></div>
+      <div class="arg"><div class="arg-dot"></div><div><div class="arg-name">Flexibilité totale</div><div class="arg-desc">De 1 mois à plusieurs années</div></div></div>
+      <div class="arg"><div class="arg-dot"></div><div><div class="arg-name">Services inclus</div><div class="arg-desc">Internet, accueil, salles de réunion, café</div></div></div>
+      <div class="arg"><div class="arg-dot"></div><div><div class="arg-name">Canal Saint-Martin</div><div class="arg-desc">Paris 10e — accessible &amp; inspirant</div></div></div>
+    </div>
+
+    <div class="sep"></div>
+    <div class="cta-label">Contact direct</div>
+    <a class="cta-link" href="mailto:contact@jorooffice.com">contact@jorooffice.com</a>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <p class="eyebrow">Demande de bureau</p>
+    <h1 class="page-title">Une <strong>question&nbsp;?</strong></h1>
+    <p class="page-sub">Nous sommes là pour vous aider et répondre à vos besoins.<br>Notre équipe revient vers vous sous 24h.</p>
+
+    <!-- ① -->
+    <div class="section">
+      <div class="sec-head"><div class="sec-num">1</div><div class="sec-name">Vos coordonnées</div></div>
+      <div class="row r2">
+        <div class="f"><label class="lbl">Prénom <span class="req">*</span></label><input type="text" placeholder="Marie"></div>
+        <div class="f"><label class="lbl">Nom <span class="req">*</span></label><input type="text" placeholder="Dupont"></div>
+      </div>
+      <div class="row"><div class="f"><label class="lbl">E-mail professionnel <span class="req">*</span></label><input type="email" placeholder="marie.dupont@entreprise.com"></div></div>
+      <div class="row r2">
+        <div class="f">
+          <label class="lbl">Numéro de téléphone</label>
+          <div class="phone">
+            <select>
+              <option>🇫🇷 +33</option><option>🇧🇪 +32</option><option>🇨🇭 +41</option>
+              <option>🇱🇺 +352</option><option>🇬🇧 +44</option><option>🇺🇸 +1</option>
+            </select>
+            <input type="tel" placeholder="06 12 34 56 78">
+          </div>
+        </div>
+        <div class="f"><label class="lbl">Poste / Fonction</label><input type="text" placeholder="Directeur général, DRH…"></div>
+      </div>
+    </div>
+
+    <!-- ② -->
+    <div class="section">
+      <div class="sec-head"><div class="sec-num">2</div><div class="sec-name">Votre entreprise</div></div>
+      <div class="row r2">
+        <div class="f"><label class="lbl">Nom de l'entreprise <span class="req">*</span></label><input type="text" placeholder="Acme SAS"></div>
+        <div class="f">
+          <label class="lbl">Secteur d'activité <span class="req">*</span></label>
+          <select class="ph" onchange="this.classList.remove('ph')">
+            <option value="" disabled selected></option>
+            <option>Tech / Numérique</option><option>Finance / Fintech</option>
+            <option>Conseil / Services</option><option>Média / Communication</option>
+            <option>Mode / Luxe / Design</option><option>Santé / MedTech</option>
+            <option>E-commerce / Retail</option><option>Juridique</option>
+            <option>Architecture / BTP</option><option>Autre</option>
+          </select>
+        </div>
+      </div>
+      <div class="row r2">
+        <div class="f">
+          <label class="lbl">Taille de l'entreprise</label>
+          <select class="ph" onchange="this.classList.remove('ph')">
+            <option value="" disabled selected></option>
+            <option>1–5 personnes</option><option>6–20 personnes</option>
+            <option>21–50 personnes</option><option>51–200 personnes</option><option>200+ personnes</option>
+          </select>
+        </div>
+        <div class="f"><label class="lbl">Site web</label><input type="url" placeholder="https://votre-site.com"></div>
+      </div>
+    </div>
+
+    <!-- ③ -->
+    <div class="section">
+      <div class="sec-head"><div class="sec-num">3</div><div class="sec-name">Votre besoin</div></div>
+
+      <div class="f" style="margin-bottom:18px;">
+        <label class="lbl" style="margin-bottom:9px;">Type d'espace <span class="req">*</span></label>
+        <div class="rc-grid">
+          <div class="rc"><input type="radio" name="type" id="t1" checked><label for="t1"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>Bureau privatif</label></div>
+          <div class="rc"><input type="radio" name="type" id="t2"><label for="t2"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Étage dédié</label></div>
+          <div class="rc"><input type="radio" name="type" id="t3"><label for="t3"><svg viewBox="0 0 24 24"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/></svg>Espace événement</label></div>
+        </div>
+      </div>
+
+      <div class="f" style="margin-bottom:18px;">
+        <div class="range-wrap">
+          <div class="range-top">
+            <label class="lbl" style="margin:0;">Nombre de postes <span class="req">*</span></label>
+            <span class="range-badge" id="rv">8 postes</span>
+          </div>
+          <input type="range" id="sl" min="1" max="60" value="8" oninput="upRange(this)">
+          <div class="range-marks"><span>1</span><span>15</span><span>30</span><span>45</span><span>60+</span></div>
+        </div>
+      </div>
+
+      <div class="row r2">
+        <div class="f"><label class="lbl">Date de démarrage <span class="req">*</span></label><input type="date" min="2026-03-27"></div>
+        <div class="f">
+          <label class="lbl">Durée prévisionnelle <span class="req">*</span></label>
+          <select class="ph" onchange="this.classList.remove('ph')">
+            <option value="" disabled selected></option>
+            <option>1–3 mois</option><option>3–6 mois</option><option>6–12 mois</option>
+            <option>1–2 ans</option><option>2 ans et plus</option><option>Non défini</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- ④ -->
+    <div class="section">
+      <div class="sec-head"><div class="sec-num">4</div><div class="sec-name">Budget &amp; services</div></div>
+
+      <div class="f" style="margin-bottom:20px;">
+        <label class="lbl" style="margin-bottom:9px;">Budget mensuel envisagé (HT) <span class="req">*</span></label>
+        <div class="bgt-grid">
+          <div class="bgt"><input type="radio" name="bgt" id="b1"><label for="b1">&lt; 3 000 €<small>/ mois</small></label></div>
+          <div class="bgt"><input type="radio" name="bgt" id="b2" checked><label for="b2">3–6 000 €<small>/ mois</small></label></div>
+          <div class="bgt"><input type="radio" name="bgt" id="b3"><label for="b3">6–12 000 €<small>/ mois</small></label></div>
+          <div class="bgt"><input type="radio" name="bgt" id="b4"><label for="b4">&gt; 12 000 €<small>/ mois</small></label></div>
+        </div>
+      </div>
+
+      <div class="f">
+        <label class="lbl" style="margin-bottom:11px;">Services importants pour vous</label>
+        <div class="ck-list">
+          <label class="ck"><input type="checkbox" checked><span class="box"><svg viewBox="0 0 10 8"><polyline points="1,4 4,7 9,1"/></svg></span>Salles de réunion incluses</label>
+          <label class="ck"><input type="checkbox" checked><span class="box"><svg viewBox="0 0 10 8"><polyline points="1,4 4,7 9,1"/></svg></span>Accueil &amp; conciergerie</label>
+          <label class="ck"><input type="checkbox"><span class="box"><svg viewBox="0 0 10 8"><polyline points="1,4 4,7 9,1"/></svg></span>Personnalisation / identité visuelle de l'espace</label>
+          <label class="ck"><input type="checkbox"><span class="box"><svg viewBox="0 0 10 8"><polyline points="1,4 4,7 9,1"/></svg></span>Domiciliation / adresse commerciale</label>
+          <label class="ck"><input type="checkbox"><span class="box"><svg viewBox="0 0 10 8"><polyline points="1,4 4,7 9,1"/></svg></span>Accès 24h/24 — 7j/7</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑤ -->
+    <div class="section">
+      <div class="sec-head"><div class="sec-num">5</div><div class="sec-name">Contexte &amp; découverte</div></div>
+      <div class="row r2">
+        <div class="f">
+          <label class="lbl">Situation actuelle</label>
+          <select class="ph" onchange="this.classList.remove('ph')">
+            <option value="" disabled selected></option>
+            <option>Nouvelle implantation à Paris</option>
+            <option>En télétravail, cherche un bureau</option>
+            <option>Fin de bail — déménagement</option>
+            <option>Croissance — besoin de plus d'espace</option>
+            <option>Déménagement intra-Paris</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="f">
+          <label class="lbl">Comment nous avez-vous connus ? <span class="req">*</span></label>
+          <select class="ph" onchange="this.classList.remove('ph')">
+            <option value="" disabled selected></option>
+            <option>Bouche à oreille / recommandation</option>
+            <option>LinkedIn</option><option>Instagram</option><option>Google</option>
+            <option>LBM / Coworkify</option>
+            <option>Passé devant l'immeuble</option>
+            <option>Presse / article</option><option>Autre</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="f"><label class="lbl">Avez-vous des détails à apporter à votre demande ?</label><textarea placeholder="Décrivez votre projet, vos contraintes particulières, ou toute information qui nous aiderait à vous proposer la meilleure solution…"></textarea></div>
+      </div>
+    </div>
+
+    <div class="form-foot">
+      <p class="rgpd">En soumettant ce formulaire vous acceptez notre <a href="#">politique de confidentialité</a>. Vos données ne seront jamais revendues.</p>
+      <button class="btn" onclick="handleSend()">
+        Envoyer
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </div>
+  </main>
+</div>
+
+<div class="success" id="sc">
+  <div class="s-ring"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <h2 class="s-h">Demande envoyée</h2>
+  <p class="s-p">Notre équipe vous contacte sous 24h pour affiner votre projet.</p>
+</div>
+
+<script>
+  function upRange(el) {
+    const v = +el.value;
+    document.getElementById('rv').textContent = v >= 60 ? '60+ postes' : v + (v > 1 ? ' postes' : ' poste');
+    const p = ((v-1)/59*100).toFixed(1);
+    el.style.background = `linear-gradient(to right,#81C6C1 0%,#81C6C1 ${p}%,rgba(255,255,255,.1) ${p}%)`;
+  }
+  upRange(document.getElementById('sl'));
+
+  function handleSend() {
+    const s = document.getElementById('sc');
+    s.classList.add('show');
+    setTimeout(() => s.classList.remove('show'), 3500);
+  }
+</script>
+</body>
+</html>
